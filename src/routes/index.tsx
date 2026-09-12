@@ -123,7 +123,7 @@ function RoyalIndustriesPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const mapKey = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY;
+  const mapKey = import.meta.env["VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY"];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);

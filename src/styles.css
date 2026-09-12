@@ -59,29 +59,39 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-industrial: var(--industrial);
+  --color-hero-foreground: var(--hero-foreground);
+  --color-hero-muted: var(--hero-muted);
+  --color-hero-line: var(--hero-line);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
+  --font-display: "Barlow Condensed", sans-serif;
+  --font-sans: "Manrope", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --shadow-industrial: var(--shadow-industrial);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 0.25rem;
+  --background: oklch(0.985 0.003 80);
+  --foreground: oklch(0.18 0.01 40);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: oklch(0.18 0.01 40);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.18 0.01 40);
+  --primary: oklch(0.53 0.21 27);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.955 0.004 80);
+  --secondary-foreground: oklch(0.18 0.01 40);
+  --muted: oklch(0.93 0.004 80);
+  --muted-foreground: oklch(0.48 0.012 45);
+  --accent: oklch(0.92 0.03 28);
+  --accent-foreground: oklch(0.43 0.19 27);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --border: oklch(0.86 0.008 60);
+  --input: oklch(0.82 0.008 60);
+  --ring: oklch(0.53 0.21 27);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -95,6 +105,13 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  --industrial: oklch(0.155 0.008 35);
+  --hero-foreground: oklch(0.985 0.002 80);
+  --hero-muted: oklch(0.78 0.01 65);
+  --hero-line: oklch(1 0 0 / 16%);
+  --whatsapp: oklch(0.67 0.18 145);
+  --whatsapp-foreground: oklch(0.99 0 0);
+  --shadow-industrial: 0 20px 50px -20px oklch(0.1 0.01 40 / 45%);
 }
 
 .dark {
@@ -140,5 +157,55 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+    scroll-behavior: smooth;
   }
+
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+}
+
+@utility section-space {
+  padding-block: 7rem;
+  @media (max-width: 767px) { padding-block: 5rem; }
+}
+
+@utility section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  & > span { width: 2.5rem; height: 1px; background: var(--color-primary); }
+}
+
+.hero-shade {
+  background: linear-gradient(90deg, oklch(0.12 0.006 35 / 96%) 0%, oklch(0.12 0.006 35 / 78%) 42%, oklch(0.12 0.006 35 / 22%) 72%, transparent 100%);
+}
+
+.sound-lines {
+  background-image: repeating-linear-gradient(90deg, transparent 0 22px, color-mix(in oklab, var(--primary) 45%, transparent) 22px 24px);
+  mask-image: linear-gradient(to top, black, transparent);
+}
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 700ms ease, transform 700ms ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.animate-enter { animation: enter 800ms ease-out both; }
+
+@keyframes enter { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+@media (max-width: 767px) {
+  .hero-shade { background: linear-gradient(90deg, oklch(0.12 0.006 35 / 95%), oklch(0.12 0.006 35 / 70%)); }
 }

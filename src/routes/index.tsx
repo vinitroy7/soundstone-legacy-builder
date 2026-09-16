@@ -2,31 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import {
   ArrowRight,
-  Building2,
-  Check,
-  ChevronRight,
-  Church,
-  Factory,
-  GraduationCap,
-  Headphones,
   Mail,
   MapPin,
   Menu,
-  Mic2,
   Phone,
-  Radio,
   ShieldCheck,
-  Train,
-  Users,
-  Volume2,
   X,
-  Zap,
 } from "lucide-react";
 import { toast } from "sonner";
 
 import heroImage from "@/assets/royal-industries-hero.jpg";
 import manufacturingImage from "@/assets/royal-manufacturing.jpg";
-import productsImage from "@/assets/royal-products.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,30 +22,8 @@ import { supabase } from "@/integrations/supabase/client";
 const navItems = [
   ["Home", "#home"],
   ["About Us", "#about"],
-  ["Our Legacy", "#legacy"],
-  ["Products", "#products"],
-  ["OEM Excellence", "#oem"],
   ["Contact Us", "#contact"],
 ] as const;
-
-const products = [
-  { icon: Radio, title: "Public Address Amplifiers", text: "Powerful, dependable amplification engineered for professional audio applications." },
-  { icon: Volume2, title: "Horn Speakers", text: "Durable, high-performance speakers designed for clear, far-reaching sound projection." },
-  { icon: Mic2, title: "Microphones", text: "Professional microphones engineered for natural clarity and dependable performance." },
-  { icon: Zap, title: "Megaphones", text: "Portable, powerful communication systems for announcements wherever they are needed." },
-  { icon: Headphones, title: "Integrated PA Systems", text: "Complete public address solutions for commercial and professional environments." },
-  { icon: Factory, title: "Custom OEM Manufacturing", text: "Production partnerships backed by generations of engineering and manufacturing expertise." },
-];
-
-const industries = [
-  { icon: GraduationCap, label: "Education", detail: "Schools & Universities" },
-  { icon: Building2, label: "Government", detail: "Public Institutions" },
-  { icon: Church, label: "Religious Places", detail: "Places of Worship" },
-  { icon: Users, label: "Commercial", detail: "Offices & Businesses" },
-  { icon: Mic2, label: "Events", detail: "Public Gatherings" },
-  { icon: Factory, label: "Industrial", detail: "Factories & Facilities" },
-  { icon: Train, label: "Transportation", detail: "Stations & Public Areas" },
-];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -191,7 +155,7 @@ function RoyalIndustriesPage() {
             <h1 className="font-display text-5xl font-bold leading-[0.98] tracking-normal sm:text-6xl md:text-8xl">65+ Years of Sound Engineering <span className="text-primary">Excellence.</span></h1>
             <p className="mt-7 max-w-2xl text-base leading-7 text-hero-muted md:text-xl md:leading-8">Royal Industries is a trusted name in Public Address Systems, built on generations of manufacturing expertise and reliable performance.</p>
             <div className="mt-10 flex flex-wrap gap-3">
-              <Button asChild variant="industrial" size="xl"><a href="#legacy">Explore Our Legacy <ArrowRight /></a></Button>
+              <Button asChild variant="industrial" size="xl"><a href="#about">About Royal Industries <ArrowRight /></a></Button>
               <Button asChild variant="heroOutline" size="xl"><a href="#contact">Contact Us</a></Button>
             </div>
           </div>
@@ -219,76 +183,6 @@ function RoyalIndustriesPage() {
           <div className="reveal relative">
             <img src={manufacturingImage} alt="Experienced engineer testing a public address amplifier" loading="lazy" width={1400} height={900} className="aspect-[4/3] w-full object-cover" />
             <div className="absolute -bottom-6 -left-3 bg-primary p-6 text-primary-foreground shadow-industrial md:-left-8"><strong className="block font-display text-4xl">Since</strong><span className="text-sm font-bold uppercase tracking-[0.14em]">The 1960s</span></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="legacy" className="section-space bg-secondary">
-        <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <SectionHeading eyebrow="Our Legacy" title="65+ Years of Trust. One Legacy." description="A journey shaped by craftsmanship, enduring partnerships and an unwavering commitment to dependable sound." />
-          <div className="mt-14 grid gap-0 border-y border-border md:grid-cols-4">
-            {[
-              ["1960s", "The Beginning", "Royal Industries begins its journey in the Public Address Systems industry."],
-              ["Generations", "Growing with Purpose", "Manufacturing capabilities and technical expertise expand over time."],
-              ["OEM", "Manufacturing Excellence", "A trusted original OEM association built on quality audio manufacturing."],
-              ["Today", "The Legacy Continues", "Reliability, innovation and engineering excellence carry forward."],
-            ].map(([year, title, text], index) => <article key={year} className="reveal relative border-border px-6 py-10 md:border-r md:last:border-r-0"><span className="mb-7 grid size-10 place-items-center border border-primary font-mono text-sm font-bold text-primary">0{index + 1}</span><p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">{year}</p><h3 className="mt-3 font-display text-2xl font-bold text-foreground">{title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{text}</p></article>)}
-          </div>
-        </div>
-      </section>
-
-      <section id="products" className="section-space">
-        <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-end">
-            <SectionHeading eyebrow="Product Expertise" title="Engineered for Every Voice to Be Heard." description="Professional audio equipment designed for consistent performance, clear communication and demanding environments." />
-            <img src={productsImage} alt="Range of public address amplifiers, speakers, microphones and megaphones" loading="lazy" width={1400} height={900} className="reveal aspect-[16/8] w-full object-cover" />
-          </div>
-          <div className="mt-10 grid gap-px bg-border md:grid-cols-2 lg:grid-cols-3">
-            {products.map((product, index) => <article key={product.title} className="group reveal bg-background p-7 transition-colors hover:bg-secondary"><div className="flex items-start justify-between"><product.icon className="size-9 text-primary" strokeWidth={1.5} /><span className="font-mono text-xs text-muted-foreground">0{index + 1}</span></div><h3 className="mt-8 font-display text-xl font-bold uppercase text-foreground">{product.title}</h3><p className="mt-3 min-h-18 text-sm leading-6 text-muted-foreground">{product.text}</p><a href="#contact" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary">Explore More <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" /></a></article>)}
-          </div>
-        </div>
-      </section>
-
-      <section id="oem" className="section-space bg-industrial text-hero-foreground">
-        <div className="mx-auto grid max-w-7xl gap-14 px-5 lg:grid-cols-[1fr_0.85fr] lg:items-center lg:px-8">
-          <div>
-            <SectionHeading inverse eyebrow="OEM Excellence" title="Original OEM Manufacturing Excellence" description="Decades of engineering, production and quality-focused manufacturing have established Royal Industries as a trusted name in professional audio equipment." />
-            <blockquote className="reveal mt-10 border-l-2 border-primary pl-6 font-display text-2xl font-semibold leading-snug text-hero-foreground md:text-3xl">Proud Legacy. Trusted Manufacturing. Reliable Sound.</blockquote>
-          </div>
-          <div className="reveal grid gap-px bg-hero-line sm:grid-cols-2">
-            {["65+ Years of Experience", "Experienced Manufacturing", "Quality-Focused Production", "Reliable Engineering", "Professional Audio Solutions", "OEM Capabilities"].map((item) => <div key={item} className="flex min-h-24 items-center gap-3 bg-industrial p-5"><span className="grid size-7 shrink-0 place-items-center bg-primary text-primary-foreground"><Check className="size-4" /></span><span className="text-sm font-semibold text-hero-foreground">{item}</span></div>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space">
-        <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <SectionHeading eyebrow="Why Royal Industries" title="Experience You Can Hear. Quality You Can Trust." />
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              ["65+ Years Experience", "Generations of industry knowledge and manufacturing expertise."], ["Trusted Quality", "A lasting commitment to reliable and durable products."], ["OEM Expertise", "Professional manufacturing capabilities proven over decades."], ["Engineering Excellence", "Precision-focused design, testing and production."], ["Customer Trust", "Long-standing relationships built through dependable service."], ["Industry Knowledge", "Deep understanding of professional public address equipment."],
-            ].map(([title, text], index) => <article key={title} className="reveal border-t-2 border-primary pt-6"><span className="font-mono text-xs text-primary">0{index + 1}</span><h3 className="mt-4 font-display text-xl font-bold text-foreground">{title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p></article>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-border bg-secondary py-16">
-        <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <p className="section-eyebrow reveal"><span />Industries We Serve</p>
-          <div className="mt-9 grid grid-cols-2 gap-px bg-border md:grid-cols-4 lg:grid-cols-7">
-            {industries.map((industry) => <div key={industry.label} className="reveal bg-secondary p-5 text-center"><industry.icon className="mx-auto size-7 text-primary" strokeWidth={1.5} /><strong className="mt-4 block text-sm text-foreground">{industry.label}</strong><span className="mt-1 block text-xs leading-5 text-muted-foreground">{industry.detail}</span></div>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space">
-        <div className="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[0.9fr_1fr] lg:items-center lg:px-8">
-          <img src={manufacturingImage} alt="Precision testing and quality inspection at Royal Industries" loading="lazy" width={1400} height={900} className="reveal aspect-[4/3] w-full object-cover" />
-          <div>
-            <SectionHeading eyebrow="Manufacturing & Quality" title="Built with Experience. Tested for Reliability." description="From product development to production and final quality checks, every stage is focused on delivering professional Public Address solutions that perform consistently." />
-            <div className="reveal mt-8 grid grid-cols-2 gap-4">
-              {["Precision Manufacturing", "Experienced Team", "Quality Inspection", "Reliable Components", "Consistent Performance", "Professional Standards"].map((item) => <div key={item} className="flex items-center gap-2 text-sm font-semibold text-foreground"><Check className="size-4 shrink-0 text-primary" />{item}</div>)}
-            </div>
           </div>
         </div>
       </section>
